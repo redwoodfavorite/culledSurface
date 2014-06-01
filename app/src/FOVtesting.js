@@ -2,7 +2,7 @@ define(function(require, exports, module) {
     var Engine           = require('famous/core/Engine');
     var Modifier         = require('famous/core/Modifier');
     var Surface          = require('famous/core/Surface');
-    var CulledSurface    = require('famous/core/CulledSurface');
+    var CulledSurface    = require('./CulledSurface');
     var Transform        = require('famous/core/Transform');
     var Easing           = require('famous/transitions/Easing');
     var Transitionable   = require('famous/transitions/Transitionable');
@@ -18,13 +18,10 @@ define(function(require, exports, module) {
 
     var cullingPadding = -150;
 
-    // console.log("viewport angle is: ", Math.atan((window.innerWidth/2)/1000) * 57.2957795, " degrees")
-
     /////////////////////////////////////////////////////
     // INITIALIZE MOVING SURFACES
     /////////////////////////////////////////////////////
 
-    var mods = [];
     for (var i = 0; i < 50; i++) {
         var surf = new CulledSurface({
             size: [75, 75],
@@ -34,7 +31,7 @@ define(function(require, exports, module) {
             }
         });
         var mod = new Modifier({
-            size: [74, 74],
+            size: [75, 75],
             origin: [0.5, 0.5],
             align: [0.5, 0.5],
             transform: Transform.translate(0, 0, -500)
@@ -68,7 +65,8 @@ define(function(require, exports, module) {
     /////////////////////////////////////////////////////
 
     var renderBox = new Surface({
-        size: [window.innerWidth + (cullingPadding * 2), window.innerHeight + (cullingPadding * 2)],
+        size: [window.innerWidth + (cullingPadding * 2),
+         window.innerHeight + (cullingPadding * 2)],
         properties: {
             color: 'white',
             border: '2px dotted white'
